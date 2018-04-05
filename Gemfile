@@ -10,7 +10,7 @@ gem 'rack-canonical-host'
 gem "rghost"
 gem "rghost_barcode"
 gem "parseline"
-gem "brcobranca", git: 'https://github.com/kivanio/brcobranca'
+gem "brcobranca", git: 'https://github.com/cristophervidalmachado/brcobranca'
 
 gem 'sass-rails'
 gem 'uglifier'

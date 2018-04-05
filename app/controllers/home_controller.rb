@@ -13,102 +13,41 @@ class HomeController < ApplicationController
     banco=params[:banco].to_sym
 
     @boleto = case banco
-              when :itau
-                Brcobranca::Boleto::Itau.new
-              when :bb
-                Brcobranca::Boleto::BancoBrasil.new
-              when :hsbc
-                Brcobranca::Boleto::Hsbc.new
-              when :santander
-                Brcobranca::Boleto::Santander.new
-              when :bradesco
-                Brcobranca::Boleto::Bradesco.new
-              when :caixa
-                Brcobranca::Boleto::Caixa.new
-              when :sicredi
-                Brcobranca::Boleto::Sicredi.new
-              when :sicoob
-                Brcobranca::Boleto::Sicoob.new
-              when :banestes
-                Brcobranca::Boleto::Banestes.new
-              when :brasilia
-                Brcobranca::Boleto::BancoBrasilia.new
-              when :bnb
-                Brcobranca::Boleto::BancoNordeste.new
-              when :banrisul
-                Brcobranca::Boleto::Banrisul.new
-              when :cecred
-                Brcobranca::Boleto::Cecred.new
-              when :credisis
-                Brcobranca::Boleto::Credisis.new
-              when :unicred
-                Brcobranca::Boleto::Unicred.new
+              when :msbank
+                Brcobranca::Boleto::Msbank.new
               end
 
-    @boleto.cedente = "Alipio Barbosa"
-    @boleto.documento_cedente = "12345678912"
-    @boleto.sacado = "Julio Pozzebom"
-    @boleto.sacado_documento = "12345678900"
-    @boleto.avalista = "Americo Barbosa"
-    @boleto.avalista_documento = "12345678912"
-    @boleto.valor = 11135.00
-    @boleto.agencia = "4042"
-    @boleto.conta_corrente = "61900"
+    @boleto.cedente = "MSBANK"
+    @boleto.documento_cedente = "19307785000178"
+    @boleto.avalista = ""
+    @boleto.avalista_documento = ""
+    @boleto.valor = 100.25
+    @boleto.agencia = "0001"
+    @boleto.conta_corrente = "19307785"
     @boleto.variacao = "19"
+    @boleto.sacado = "Rafael Augusto Machado Escobar"
+    @boleto.sacado_documento = "05260024930"
+    @boleto.documento_numero = "564865"
 
     case banco
-    when :itau
+    when :msbank
       # ITAU
       # O que diferencia um tipo de boleto de outro, dentro do itáu é o tipo de carteira utilizado.
-      @boleto.convenio = "12345"
-    when :bb
-      # BB
-      # O que diferencia um tipo de boleto de outro, dentro do Banco do Brasil é a quantidade de dígitos do convênio.
-      @boleto.convenio = "1238798"
-    when :hsbc
-      # HSBC
-      # O que diferencia um tipo de boleto de outro, dentro do HSBC é a quantidade de dígitos do número do documento.
-      @boleto.nosso_numero = "102008"
-    when :unibanco
-      # UNIBANCO
-      @boleto.convenio = "1238798"
-    when :caixa
-      # CAIXA
-      @boleto.convenio = "100000"
-    when :sicredi
-      @boleto.byte_idt = "2"
-      @boleto.posto = "18"
-      @boleto.convenio = "12387"
-    when :sicoob
-      @boleto.convenio = "1238798"
-    when :banestes
-      @boleto.variacao = "2"
-      @boleto.digito_conta_corrente = "2"
-    when :unicred
-      @boleto.byte_idt = "2"
-      @boleto.posto = "18"
-      @boleto.convenio = "12387"
-    when :bnb
-      @boleto.digito_conta_corrente = "2"
-    when :cecred
-      @boleto.convenio = "12387"
-    when :credisis
-      @boleto.codigo_cedente = "1238"
-      @boleto.convenio = "12387"
-    else
-      @boleto.convenio = "1238798"
+      @boleto.convenio = "00000"
+
+
     end
 
-    @boleto.nosso_numero = "111"
-    @boleto.data_vencimento = "2008-02-01".to_date
+    @boleto.nosso_numero = "564865"
+    @boleto.data_vencimento = "2018-07-27".to_date
     @boleto.instrucao1 = "Pagável na rede bancária até a data de vencimento."
     @boleto.instrucao2 = "Juros de mora de 2.0% mensal(R$ 0,09 ao dia)"
     @boleto.instrucao3 = "DESCONTO DE R$ 29,50 APÓS 05/11/2006 ATÉ 15/11/2006"
     @boleto.instrucao4 = "NÃO RECEBER APÓS 15/11/2006"
     @boleto.instrucao5 = "Após vencimento pagável somente nas agências do Banco do Brasil"
     @boleto.instrucao6 = "ACRESCER R$ 4,00 REFERENTE AO BOLETO BANCÁRIO"
-    @boleto.sacado_endereco = "Av. Rubéns de Mendonça, 157 - 78008-000 - Cuiabá/MT"
-    @boleto.cedente_endereco = "Av. Rubéns de Mendonça, 1000 - 78008-000 - Cuiabá/MT"
+    @boleto.sacado_endereco = "Av. Felipe Wandscher. 2310, Vila Yolanda"
+    @boleto.cedente_endereco = "Av. Felipe Wandscher. 2310, Vila Yolanda"
 
     formato=params[:boleto][:formato].to_sym
     headers['Content-Type']=FORMATOS_SUPORTADOS[formato]
